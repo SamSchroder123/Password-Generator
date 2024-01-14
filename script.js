@@ -148,7 +148,7 @@ function getPasswordOptions() {
 
     var valueArray = Object.values(passwordSettings);
     for (i = 1; i < valueArray.length; i++) {
-      if (valueArray[i] == "y") {
+      if (valueArray[i] === "y") {
         numY += 1;
       }
     }
@@ -159,17 +159,43 @@ function getPasswordOptions() {
   return passwordSettings;
 }
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+}
+
 // Function for getting a random element from an array
-function getRandom(arr) {}
+function getRandom(arr) {
+  return arr[getRandomInt(0, arr.length)];
+}
 
 // Function to generate password with user input
 function generatePassword() {
   var settings = getPasswordOptions();
-  console.log(settings.length);
-  console.log(settings.lower);
-  console.log(settings.upper);
-  console.log(settings.numeric);
-  console.log(settings.special);
+  // console.log(settings.length);
+  // console.log(settings.lower);
+  // console.log(settings.upper);
+  // console.log(settings.numeric);
+  // console.log(settings.special);
+  var password = "";
+  var acceptedChars = [];
+  if (settings.lower === "y") {
+    acceptedChars.push(...lowerCasedCharacters);
+  }
+  if (settings.upper === "y") {
+    acceptedChars.push(...upperCasedCharacters);
+  }
+  if (settings.numeric === "y") {
+    acceptedChars.push(...numericCharacters);
+  }
+  if (settings.special === "y") {
+    acceptedChars.push(...specialCharacters);
+  }
+  for (i = 0; i < settings.length; i++) {
+    password += getRandom(acceptedChars);
+  }
+  return password;
 }
 
 // Get references to the #generate element
