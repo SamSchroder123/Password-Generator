@@ -95,56 +95,67 @@ function getPasswordOptions() {
     alert("Password must be between 8 and 128 characters long.");
     length = prompt("Length of password:");
   }
+  var numY = 0;
+  while (numY < 1) {
+    alert(
+      "type y/n to select/deselect the following character sets to be included in your password."
+    );
 
-  alert(
-    "type y/n to select/deselect the following character sets to be included in your password."
-  );
-
-  hasLowerCase = prompt("Lowercase? (y/n):");
-  hasLowerCase = hasLowerCase.toLowerCase();
-  while (hasLowerCase != "y" && hasLowerCase != "n") {
-    alert("input must be 'y' or 'n' ");
     hasLowerCase = prompt("Lowercase? (y/n):");
     hasLowerCase = hasLowerCase.toLowerCase();
-  }
+    while (hasLowerCase != "y" && hasLowerCase != "n") {
+      alert("input must be 'y' or 'n' ");
+      hasLowerCase = prompt("Lowercase? (y/n):");
+      hasLowerCase = hasLowerCase.toLowerCase();
+    }
 
-  hasUpperCase = prompt("Uppercase? (y/n):");
-  hasUpperCase = hasUpperCase.toLowerCase();
-  while (hasUpperCase != "y" && hasUpperCase != "n") {
-    alert("input must be 'y' or 'n' ");
     hasUpperCase = prompt("Uppercase? (y/n):");
     hasUpperCase = hasUpperCase.toLowerCase();
-  }
+    while (hasUpperCase != "y" && hasUpperCase != "n") {
+      alert("input must be 'y' or 'n' ");
+      hasUpperCase = prompt("Uppercase? (y/n):");
+      hasUpperCase = hasUpperCase.toLowerCase();
+    }
 
-  hasNumeric = prompt("Numeric? (y/n):");
-  hasNumeric = hasNumeric.toLowerCase();
-  while (hasNumeric != "y" && hasNumeric != "n") {
-    alert("input must be 'y' or 'n' ");
     hasNumeric = prompt("Numeric? (y/n):");
     hasNumeric = hasNumeric.toLowerCase();
-  }
+    while (hasNumeric != "y" && hasNumeric != "n") {
+      alert("input must be 'y' or 'n' ");
+      hasNumeric = prompt("Numeric? (y/n):");
+      hasNumeric = hasNumeric.toLowerCase();
+    }
 
-  hasSpecial = prompt("Special? (y/n):");
-  hasSpecial = hasSpecial.toLowerCase();
-  while (hasSpecial != "y" && hasSpecial != "n") {
-    alert("input must be 'y' or 'n' ");
     hasSpecial = prompt("Special? (y/n):");
     hasSpecial = hasSpecial.toLowerCase();
+    while (hasSpecial != "y" && hasSpecial != "n") {
+      alert("input must be 'y' or 'n' ");
+      hasSpecial = prompt("Special? (y/n):");
+      hasSpecial = hasSpecial.toLowerCase();
+    }
+    // alert(length);
+    // alert(hasLowerCase);
+    // alert(hasUpperCase);
+    // alert(hasNumeric);
+    // alert(hasSpecial);
+
+    var passwordSettings = {
+      length: length,
+      lower: hasLowerCase,
+      upper: hasUpperCase,
+      numeric: hasNumeric,
+      special: hasSpecial,
+    };
+
+    var valueArray = Object.values(passwordSettings);
+    for (i = 1; i < valueArray.length; i++) {
+      if (valueArray[i] == "y") {
+        numY += 1;
+      }
+    }
+    if (numY < 1) {
+      alert("at least one character type must be selected.");
+    }
   }
-  // alert(length);
-  // alert(hasLowerCase);
-  // alert(hasUpperCase);
-  // alert(hasNumeric);
-  // alert(hasSpecial);
-
-  var passwordSettings = {
-    length: length,
-    lower: hasLowerCase,
-    upper: hasUpperCase,
-    numeric: hasNumeric,
-    special: hasSpecial,
-  };
-
   return passwordSettings;
 }
 
